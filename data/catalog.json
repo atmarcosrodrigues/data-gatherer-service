@@ -1,0 +1,24 @@
+{
+  "services": [
+    {
+      "name": "opendata",
+      "id": "cbacda72-a822-4233-a91e-27506535fc86",
+      "description": "Provides a service broker to help gather and store open data in a convenient way",
+      "requires": [],
+      "tags": [],
+      "bindable": true,
+      "plan_updateable": true,
+      "plans": [
+        {
+          "name": "public",
+          "id": "0ea99247-1b5a-41b5-ae1f-177ead47b77d",
+          "description": "Public default plan",
+          "metadata": {
+            "cost": 0,
+            "bullets": []
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+
+# Setting JAVA_OPTS
+# -----------------
+JAVA_OPTS="-Dpidfile.path=/var/run/service-broker/play.pid -Dconfig.file=/etc/service-broker/service-broker.conf"
+
+# Setting PIDFILE
+# ---------------
+PIDFILE="/var/run/service-broker/play.pid"
+

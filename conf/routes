@@ -1,0 +1,36 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+#
+
+# Home page
+GET     /                           @controllers.Application.index()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               @controllers.Assets.versioned(path="/public", file: Asset)
+
+# Called during creation of the service broker on cf
+GET     /v2/catalog                 @controllers.Application.fetchCatalog()
+
+# TODO: Implement the following routes
+PUT     /v2/service_instances/:id               @controllers.Application.provisionInstance(id: Long)
+GET     /v2/service_instances/:instance_id/last_operation   @controllers.Application.getLastOperation(instance_id: Long)
+PATCH   /v2/service_instances/:instance_id      @controllers.Application.updateInstance(instance_id: Long)
+PUT     /v2/service_instances/:instance_id/service_bindings/:binding_id     @controllers.Application.createBind(instance_id: Long, binding_id: Long)
+DELETE  /v2/service_instances/:instance_id/service_bindings/:binding_id     @controllers.Application.deleteBind(instance_id: Long, binding_id: Long)
+DELETE  /v2/service_instances/:instance_id      @controllers.Application.deprovision(instance_id: Long, service_id: String, plan_id: String, accepts_incomplete: Boolean ?=false)
+
+POST    /data                                        @controllers.DataGatherer.create()
+POST    /data/upload/:id                             @controllers.DataGatherer.upload(id: String)
+PUT     /data/upload/:id                             @controllers.DataGatherer.upload(id: String)
+PUT     /data/:id                                    @controllers.DataGatherer.update(id: String)
+DELETE  /data/:id                                    @controllers.DataGatherer.delete(id: String)
+GET     /data                                        @controllers.DataGatherer.list()
+GET     /data/:id                                    @controllers.DataGatherer.show(id: String)
+GET     /storage/:type/:filename                     @controllers.LocalContent.get(type: String, filename: String)
+
+# Plugins will handle the calls to /opendata/*
+GET     /opendata/*odRoute                     @controllers.OpenData.handle(odRoute: String)
+POST    /opendata/*odRoute                     @controllers.OpenData.handle(odRoute: String)
+PUT     /opendata/*odRoute                     @controllers.OpenData.handle(odRoute: String)
+DELETE  /opendata/*odRoute                     @controllers.OpenData.handle(odRoute: String)

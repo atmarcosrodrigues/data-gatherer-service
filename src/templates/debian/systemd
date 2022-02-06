@@ -1,0 +1,20 @@
+[Unit]
+Description=Service-broker for data gathering, proxying and caching
+Requires=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/usr/share/service-broker
+ExecStart=/usr/share/service-broker/bin/service-broker-modules $JAVA_OPTS
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=always
+RestartSec=60
+User=service-broker
+ExecStartPre=/bin/mkdir -p /run/service-broker
+ExecStartPre=/bin/chown service-broker:service-broker /run/service-broker
+ExecStartPre=/bin/chmod 755 /run/service-broker
+PermissionsStartOnly=true
+EnvironmentFile=-/etc/default/service-broker
+
+[Install]
+WantedBy=multi-user.target
